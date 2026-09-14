@@ -1,0 +1,1291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Revenue Research Library — FlowForge Revenue</title>
+  <meta name="description" content="Independent revenue leak audits across five B2B fintech and payment infrastructure companies. Real leaks. Real dollar estimates. Real recommendations." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://flowforgerevenue.solutions/research.html" />
+  <meta property="og:title" content="Revenue Research Library — FlowForge Revenue" />
+  <meta property="og:description" content="Five independent fintech funnel audits. Every leak mapped, quantified, and documented." />
+  <meta property="og:image" content="https://flowforgerevenue.solutions/FFR_logo.png" />
+  <link rel="icon" type="image/png" href="FFR_logo.png" />
+  <link rel="apple-touch-icon" href="FFR_logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* ── RESEARCH PAGE SPECIFIC STYLES ── */
+    .research-hero { padding: 148px 0 80px; background: var(--black); position: relative; overflow: hidden; }
+    .research-hero-grid {
+      position: absolute; inset: 0;
+      background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 72px 72px; opacity: 0.15;
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 0%, black 30%, transparent 100%);
+    }
+    .research-hero .container { position: relative; z-index: 1; }
+
+    /* Cross-ref banner */
+    .crossref-banner {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-bottom: 56px;
+    }
+    .crossref-banner p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin: 0;
+    }
+    .crossref-banner p strong { color: var(--text-primary); }
+    .crossref-banner a { white-space: nowrap; font-size: 13px; }
+
+    /* Company audit card */
+    .audit-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      overflow: hidden;
+      margin-bottom: 32px;
+      transition: border-color 0.25s;
+    }
+    .audit-card:hover { border-color: var(--border-light); }
+
+    .audit-card-header {
+      background: var(--surface-2);
+      border-bottom: 1px solid var(--border);
+      padding: 28px 36px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 20px;
+      align-items: start;
+    }
+    .audit-company-name {
+      font-family: var(--font-display);
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--text-primary);
+      letter-spacing: -0.02em;
+      margin-bottom: 4px;
+    }
+    .audit-company-desc {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      max-width: 560px;
+    }
+    .audit-meta { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
+    .audit-tag {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: var(--accent-glow);
+      border: 1px solid rgba(212,245,60,0.2);
+      padding: 4px 10px;
+      border-radius: var(--r-sm);
+      white-space: nowrap;
+    }
+    .audit-leak-count {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    /* ICP targets row */
+    .audit-icp {
+      padding: 14px 36px;
+      background: var(--black);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .audit-icp-label {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      flex-shrink: 0;
+    }
+    .audit-icp-tag {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--text-secondary);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 3px 10px;
+      border-radius: var(--r-sm);
+    }
+
+    /* Leaks grid */
+    .audit-leaks {
+      padding: 28px 36px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+    .leak-card {
+      background: var(--off-black);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      padding: 22px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      transition: border-color 0.2s, transform 0.25s;
+    }
+    .leak-card:hover { border-color: var(--border-light); transform: translateY(-2px); }
+    .leak-card--wide { grid-column: span 2; }
+
+    .leak-header { display: flex; align-items: flex-start; gap: 12px; }
+    .leak-num {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      flex-shrink: 0;
+      padding-top: 2px;
+    }
+    .leak-title {
+      font-family: var(--font-display);
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-primary);
+      line-height: 1.3;
+    }
+
+    .leak-section-label {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 5px;
+    }
+    .leak-section-label--accent { color: var(--accent); }
+
+    .leak-body {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+    .leak-body em { color: var(--text-primary); font-style: normal; font-weight: 500; }
+
+    /* Evidence list */
+    .leak-evidence-list {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .leak-evidence-item {
+      font-size: 12px;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      line-height: 1.5;
+    }
+    .leak-evidence-item::before { content: '·'; color: var(--accent); flex-shrink: 0; }
+
+    /* Math block */
+    .leak-math {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-sm);
+      padding: 12px 14px;
+    }
+    .leak-math-row {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .leak-math-row--result { color: var(--accent); font-weight: 500; margin-top: 4px; }
+    .leak-math-arrow { color: var(--text-muted); }
+
+    /* Opportunity badge */
+    .leak-opportunity {
+      background: var(--accent-glow);
+      border: 1px solid rgba(212,245,60,0.25);
+      border-radius: var(--r-sm);
+      padding: 10px 14px;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    .leak-opportunity-num {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: -0.02em;
+      line-height: 1;
+      flex-shrink: 0;
+      padding-top: 1px;
+    }
+    .leak-opportunity-label {
+      font-size: 12px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    /* Recommendation */
+    .leak-rec {
+      border-left: 2px solid var(--accent);
+      padding-left: 12px;
+    }
+    .leak-rec-items {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .leak-rec-item {
+      font-size: 12px;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      line-height: 1.5;
+    }
+    .leak-rec-item::before { content: '→'; color: var(--accent); font-size: 10px; flex-shrink: 0; margin-top: 2px; }
+
+    /* Card footer */
+    .audit-card-footer {
+      border-top: 1px solid var(--border);
+      padding: 16px 36px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .audit-total-opp {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .audit-total-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .audit-total-num {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: -0.02em;
+    }
+    .audit-disclaimer {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+      font-style: italic;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .audit-card-header { grid-template-columns: 1fr; }
+      .audit-meta { align-items: flex-start; }
+      .audit-leaks { grid-template-columns: 1fr; padding: 20px; }
+      .leak-card--wide { grid-column: span 1; }
+      .audit-icp { padding: 12px 20px; }
+      .audit-card-footer { padding: 14px 20px; flex-direction: column; align-items: flex-start; }
+      .crossref-banner { flex-direction: column; gap: 12px; }
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <script>emailjs.init('mWLpJzYxGdjeg82V4');</script>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="logo"><img src="FFR_logo.png" alt="FlowForge Revenue" class="logo-img" /></a>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="services.html" class="nav-link">Services</a>
+        <a href="work.html" class="nav-link">Work</a>
+        <a href="research.html" class="nav-link active">Research</a>
+        <a href="faq.html" class="nav-link">FAQ</a>
+        <a href="index.html#diagnosis" class="nav-cta">Free Diagnosis</a>
+      </div>
+      <div class="nav-toggle" id="nav-toggle"><span></span><span></span><span></span></div>
+    </div>
+    <div class="nav-mobile" id="nav-mobile">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="services.html" class="nav-link">Services</a>
+      <a href="work.html" class="nav-link">Work</a>
+      <a href="research.html" class="nav-link active">Research</a>
+      <a href="faq.html" class="nav-link">FAQ</a>
+      <a href="index.html#diagnosis" class="nav-cta">Free Diagnosis</a>
+    </div>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <div class="research-hero">
+    <div class="research-hero-grid"></div>
+    <div class="container">
+      <div class="page-header-label">Revenue Research Library</div>
+      <h1 style="font-family:var(--font-display);font-size:clamp(36px,4.5vw,56px);font-weight:700;line-height:1.1;letter-spacing:-0.025em;max-width:720px;margin-bottom:20px;">
+        Five fintech funnels audited.<br/><span class="accent-text">Every leak documented.</span>
+      </h1>
+      <p style="font-size:17px;color:var(--text-secondary);max-width:580px;line-height:1.7;margin-bottom:0;">
+        Independent revenue opportunity audits across B2B fintech and payment infrastructure companies. Each audit uses the FlowForge Revenue Quantification Framework — observable evidence, benchmark assumptions, illustrative dollar opportunity with confidence rating, unknown variables stated, and specific fix. No client relationships implied or exist with any company audited.
+      </p>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <section class="section" style="background:var(--off-black)">
+    <div class="container">
+
+      <!-- Cross-reference banner -->
+
+      <!-- Framework methodology banner -->
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:24px 28px;margin-bottom:32px;" class="reveal">
+        <div style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);margin-bottom:14px;">FlowForge Revenue Quantification Framework v1.0 — Applied to every audit below</div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;flex-wrap:wrap;">
+          <div><div style="font-family:var(--font-mono);font-size:9px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:4px;">Step 1</div><div style="font-size:13px;color:var(--text-primary);font-weight:500;">Observable Evidence</div><div style="font-size:12px;color:var(--text-secondary);margin-top:2px;">Only what can be directly seen</div></div>
+          <div><div style="font-family:var(--font-mono);font-size:9px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:4px;">Step 2</div><div style="font-size:13px;color:var(--text-primary);font-weight:500;">Benchmark Assumptions</div><div style="font-size:12px;color:var(--text-secondary);margin-top:2px;">Every input stated explicitly</div></div>
+          <div><div style="font-family:var(--font-mono);font-size:9px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:4px;">Step 3</div><div style="font-size:13px;color:var(--text-primary);font-weight:500;">Illustrative Opportunity</div><div style="font-size:12px;color:var(--text-secondary);margin-top:2px;">Never claimed loss — always opportunity</div></div>
+          <div><div style="font-family:var(--font-mono);font-size:9px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:4px;">Step 4</div><div style="font-size:13px;color:var(--text-primary);font-weight:500;">Confidence + Fix</div><div style="font-size:12px;color:var(--text-secondary);margin-top:2px;">Rated High/Medium/Low with reason</div></div>
+        </div>
+        <div style="margin-top:14px;padding-top:14px;border-top:1px solid var(--border);font-family:var(--font-mono);font-size:11px;color:var(--accent);">Revenue Opportunity = QV &times; FR &times; DCR &times; SQLR &times; CR &times; ACV</div>
+      </div>
+
+      <div class="crossref-banner reveal">
+        <p><strong>Looking for implementation case studies?</strong> The <a href="work.html" style="color:var(--accent)">Work page</a> covers full funnel rebuilds for Finix, Adyen, Mono, and Flutterwave — including the observable evidence, benchmark models, and revenue hypotheses behind every fix.</p>
+        <a href="work.html" class="btn btn-outline">See Full Case Studies →</a>
+      </div>
+
+      <!-- ═══════════════════════════════════════ -->
+      <!-- AUDIT 1: DUPLO -->
+      <!-- ═══════════════════════════════════════ -->
+      <div class="audit-card reveal">
+        <div class="audit-card-header">
+          <div>
+            <div class="audit-company-name">Duplo</div>
+            <div class="audit-company-desc">B2B financial operations platform serving African businesses — expense management, payments, treasury, reconciliation, e-invoicing, FX capabilities, and APIs in a single financial operating system.</div>
+          </div>
+          <div class="audit-meta">
+            <span class="audit-tag">Audit #001</span>
+            <span class="audit-tag">B2B Fintech · Nigeria</span>
+            <span class="audit-leak-count">4 leaks identified</span>
+          </div>
+        </div>
+
+        <div class="audit-icp">
+          <span class="audit-icp-label">Target buyers</span>
+          <span class="audit-icp-tag">CFOs</span>
+          <span class="audit-icp-tag">Finance Managers</span>
+          <span class="audit-icp-tag">Founders</span>
+          <span class="audit-icp-tag">Operations Leaders</span>
+          <span class="audit-icp-tag">Enterprise Finance Teams</span>
+        </div>
+
+        <div class="audit-leaks">
+
+          <!-- Leak 1 -->
+          <div class="leak-card">
+            <div class="leak-header">
+              <span class="leak-num">LEAK 01</span>
+              <span class="leak-title">Demo Form Friction</span>
+            </div>
+            <div>
+              <div class="leak-section-label">Evidence</div>
+              <div class="leak-evidence-list">
+                <div class="leak-evidence-item">Demo page requires 10 fields before explaining what the prospect receives</div>
+                <div class="leak-evidence-item">No explanation of meeting duration, agenda, or expected outcome above the form</div>
+                <div class="leak-evidence-item">High-intent enterprise buyers face commitment friction before seeing value</div>
+              </div>
+            </div>
+            <div>
+              <div class="leak-section-label">Why it matters</div>
+              <div class="leak-body">Enterprise buyers delay or abandon form completion when the value of the meeting is not clearly defined. At ACV levels of $8K–$30K, every abandoned demo represents a significant pipeline miss.</div>
+            </div>
+            <div>
+              <div class="leak-section-label">Illustrative math</div>
+              <div class="leak-math">
+                <div class="leak-math-row"><span class="leak-math-arrow">·</span> 100 qualified demo page visitors</div>
+                <div class="leak-math-row"><span class="leak-math-arrow">↓</span> 10 abandon due to form friction</div>
+                <div class="leak-math-row"><span class="leak-math-arrow">↓</span> 1 lost customer opportunity (10% close rate)</div>
+                <div class="leak-math-row leak-math-row--result"><span class="leak-math-arrow">→</span> $8K–$30K ACV per lost opportunity</div>
+              </div>
+            </div>
+            <div class="leak-opportunity">
+              <div class="leak-opportunity-num">$8K–$30K</div>
+              <div class="leak-opportunity-label">Annual revenue opportunity per 100 qualified demo visitors — recoverable with pre-form value framing</div>
+            </div>
+            <div class="leak-rec">
+              <div class="leak-section-label leak-section-label--accent">Recommendation</div>
+              <div class="leak-rec-items">
+                <div class="leak-rec-item">Add meeting agenda, duration, and expected outcomes above the form</div>
+                <div class="leak-rec-item">Show sample deliverables or what the prospect will receive</div>
+                <div class="leak-rec-item">Reframe the CTA from "Book a Demo" to a diagnostic outcome</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Leak 2 -->
+          <div class="leak-card">
+            <div class="leak-header">
+              <span class="leak-num">LEAK 02</span>
+              <span class="leak-title">Pricing Opacity</span>
+            </div>
+            <div>
+              <div class="leak-section-label">Evidence</div>
+              <div class="leak-evidence-list">
+                <div class="leak-evidence-item">Pricing page shows three tiers — Essentials, Pro, Enterprise — with zero pricing information</div>
+                <div class="leak-evidence-item">Every CTA on the pricing page leads to "Book a Demo"</div>
+                <div class="leak-evidence-item">Buyers cannot self-qualify or estimate budget before committing to a sales conversation</div>
+              </div>
+            </div>
+            <div>
+              <div class="leak-section-label">Why it matters</div>
+              <div class="leak-body">When buyers cannot estimate fit from pricing signals, a percentage leave before speaking to sales. CFOs and Finance Managers making budget decisions need anchoring information — even a range — before allocating time to a vendor conversation.</div>
+            </div>
+            <div>
+              <div class="leak-section-label">Illustrative math</div>
+              <div class="leak-math">
+                <div class="leak-math-row"><span class="leak-math-arrow">·</span> 100 pricing page visitors</div>
+                <div class="leak-math-row"><span class="leak-math-arrow">↓</span> 15 abandon due to pricing uncertainty</div>
+                <div class="leak-math-row"><span class="leak-math-arrow">↓</span> 1–2 lost customer opportunities (10% close rate)</div>
+                <div class="leak-math-row leak-math-row--result"><span class="leak-math-arrow">→</span> $12K–$45K ACV per 100 visitors</div>
+              </div>
+            </div>
+            <div class="leak-opportunity">
+              <div class="leak-opportunity-num">$12K–$45K</div>
+              <div class="leak-opportunity-label">Annual revenue opportunity per 100 pricing page visitors — recoverable with transparent pricing signals</div>
+            </div>
+            <div class="leak-rec">
+              <div class="leak-section-label leak-section-label--accent">Recommendation</div>
+              <div class="leak-rec-items">
+                <div class="leak-rec-item">Add starting price or estimated range per tier</div>
+                <div class="leak-rec-item">Include buyer qualification guidance so buyers self-select</div>
+                <div class="leak-rec-item">Add a secondary CTA for buyers not yet ready for a demo</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Leak 3 -->
+          <div class="leak-card">
+            <div class="leak-header">
+              <span class="leak-num">LEAK 03</span>
+              <span class="leak-title">Homepage ICP Overload</span>
+            </div>
+            <div>
+              <div class="leak-section-label">Evidence</div>
+              <div class="leak-evidence-list">
+                <div class="leak-evidence-item">Homepage simultaneously addresses expense management, global payments, APIs, e-invoicing, treasury, and payment gateway</div>
+                <div class="leak-evidence-item">Multiple distinct buyer types land on the same page with no segmented pathways</div>
+              </div>
+            </div>
+            <div>
+              <div class="leak-section-label">Why it matters</div>
+              <div class="leak-body">When a homepage speaks to everyone simultaneously, no individual buyer feels the product was built specifically for them. A CFO evaluating treasury management and a developer evaluating APIs have fundamentally different purchase triggers — one page cannot close both without segmented entry points.</div>
+            </div>
+            <div class="leak-opportunity">
+              <div class="leak-opportunity-num">10–25%</div>
+              <div class="leak-opportunity-label">Estimated conversion efficiency gain from ICP segmentation — consistent with B2B SaaS positioning improvements at this stage</div>
+            </div>
+            <div class="leak-rec">
+              <div class="leak-section-label leak-section-label--accent">Recommendation</div>
+              <div class="leak-rec-items">
+                <div class="leak-rec-item">Create segmented experience paths for CFO, Finance Team, and Platform/API buyers</div>
+                <div class="leak-rec-item">Lead hero with the highest-value ICP's financial outcome, not product capability list</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Leak 4 -->
+          <div class="leak-card">
+            <div class="leak-header">
+              <span class="leak-num">LEAK 04</span>
+              <span class="leak-title">Weak Outcome-Based Proof</span>
+            </div>
+            <div>
+              <div class="leak-section-label">Evidence</div>
+              <div class="leak-evidence-list">
+                <div class="leak-evidence-item">Homepage is heavily feature-led — emphasizes platform capabilities over customer results</div>
+                <div class="leak-evidence-item">Limited quantified customer outcomes visible above the fold</div>
+                <div class="leak-evidence-item">Social proof present but not tied to measurable financial or operational results</div>
+              </div>
+            </div>
+            <div>
+              <div class="leak-section-label">Why it matters</div>
+              <div class="leak-body">Enterprise buyers purchase outcomes, not features. A CFO approving a financial operations platform needs to see what similar companies gained — time saved, errors reduced, reconciliation speed, cost recovered — not a list of what the platform can do technically.</div>
+            </div>
+            <div class="leak-opportunity">
+              <div class="leak-opportunity-num">$20K–$60K</div>
+              <div class="leak-opportunity-label">Illustrative additional pipeline per 100 enterprise visitors when outcome-based proof replaces feature lists in hero sections</div>
+            </div>
+            <div class="leak-rec">
+              <div class="leak-section-label leak-section-label--accent">Recommendation</div>
+              <div class="leak-rec-items">
+                <div class="leak-rec-item">Add customer stories with measurable, specific outcomes</div>
+                <div class="leak-rec-item">Replace feature bullets with before/after financial results</div>
+                <div class="leak-rec-item">Surface implementation outcomes — time to value, error reduction, reconciliation speed</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="audit-card-footer">
+          <div class="audit-total-opp">
+            <span class="audit-total-label">Total illustrative opportunity</span>
+            <span class="audit-total-num">$50K–$150K/yr</span>
+          </div>
+          <span class="audit-disclaimer">Illustrative opportunity using benchmark assumptions · All inputs stated · Adjustable with real data</span>
+        </div>
+      </div>
+
+      <!-- ═══════════════════════════════════════ -->
+      <!-- AUDIT 2: AFRIEX -->
+      <!-- ═══════════════════════════════════════ -->
+      <div class="audit-card reveal">
+        <div class="audit-card-header">
+          <div>
+            <div class="audit-company-name">Afriex</div>
+            <div class="audit-company-desc">Cross-border remittance platform with a dual product: consumer remittances and AFX Business — a B2B payments infrastructure for businesses sending and receiving money across Africa and the diaspora.</div>
+          </div>
+          <div class="audit-meta">
+            <span class="audit-tag">Audit #002</span>
+            <span class="audit-tag">Cross-border Payments</span>
+            <span class="audit-leak-count">4 leaks identified</span>
+          </div>
+        </div>
+
+        <div class="audit-icp">
+          <span class="audit-icp-label">Target buyers</span>
+          <span class="audit-icp-tag">Enterprise Finance Teams</span>
+          <span class="audit-icp-tag">B2B Operations Leaders</span>
+          <span class="audit-icp-tag">CFOs</span>
+          <span class="audit-icp-tag">Fintech Platform Builders</span>
+        </div>
+
+        <div class="audit-leaks">
+
+          <div class="leak-card">
+            <div class="leak-header">
+              <span class="leak-num">LEAK 01</span>
+              <span class="leak-title">Split Identity Problem</span>
+            </div>
+            <div>
+              <div class="leak-section-label">Evidence</div>
+              <div class="leak-evidence-list">
+                <div class="leak-evidence-item">Afriex consumer and AFX Business serve fundamentally different buyers but share brand trust signals</div>
+                <div class="leak-evidence-item">Consumer messaging bleeds into enterprise product positioning creating positioning confusion</div>
+                <div class="leak-evidence-item">Business buyers land on pages with consumer social proof and consumer language</div>
+              </div>
+            </div>
+            <div>
+              <div class="leak-section-label">Why it matters</div>
+              <div class="leak-body">Enterprise infrastructure buyers evaluate operational credibility first. When consumer messaging dominates, business buyers cannot quickly identify that AFX Business is an enterprise-grade product — they exit before the positioning registers.</div>
+            </div>
+            <div class="leak-opportunity">
+              <div class="leak-opportunity-num">$40K–$120K</div>
+              <div class="leak-opportunity-label">Illustrative annual pipeline loss per 100 enterprise visitors who fail to identify AFX as enterprise-grade infrastructure at ACV of $15K–$40K</div>
+            </div>
+            <div class="leak-rec">
+              <div class="leak-section-label leak-section-label--accent">Recommendation</div>
+              <div class="leak-rec-items">
+                <div class="leak-rec-item">Increase brand and UX separation between consumer Afriex and AFX Business</div>
+                <div class="leak-rec-item">AFX Business should have its own positioning, visual identity, and proof assets</div>
+                <div class="leak-rec-item">Enterprise homepage should lead with infrastructure credibility not consumer remittance language</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="leak-card">
+            <div class="leak-header">
+              <span class="leak-num">LEAK 02</span>
+              <span class="leak-title">Business Homepage Too Feature-Led</span>
+            </div>
+            <div>
+              <div class="leak-section-label">Evidence</div>
+              <div class="leak-evidence-list">
+                <div class="leak-evidence-item">Business homepage explains payouts, accounts, APIs, and stablecoins</div>
+                <div class="leak-evidence-item">No clear framing of who benefits most from each capability</div>
+                <div class="leak-evidence-item">Business outcomes — cost per transaction, speed to settlement, compliance coverage — not leading the narrative</div>
+              </div>
+            </div>
+            <div>
+              <div class="leak-section-label">Why it matters</div>
+              <div class="leak-body">Enterprise buyers purchase transformation — what their operations look like after using the product. Feature lists tell the buyer what the product does. Outcomes tell the buyer what they gain. CFOs making infrastructure decisions need the financial case first.</div>
+            </div>
+            <div class="leak-opportunity">
+              <div class="leak-opportunity-num">$25K–$80K</div>
+              <div class="leak-opportunity-label">Illustrative annual pipeline opportunity from shifting homepage from feature-led to outcome-led positioning for enterprise buyers</div>
+            </div>
+            <div class="leak-rec">
+              <div class="leak-section-label leak-section-label--accent">Recommendation</div>
+              <div class="leak-rec-items">
+                <div class="leak-rec-item">Lead business homepage with the specific financial outcome the buyer gains</div>
+                <div class="leak-rec-item">Frame each feature as a buyer benefit with a measurable result attached</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="leak-card">
+            <div class="leak-header">
+              <span class="leak-num">LEAK 03</span>
+              <span class="leak-title">No Strong Enterprise Proof</span>
+            </div>
+            <div>
+              <div class="leak-section-label">Evidence</div>
+              <div class="leak-evidence-list">
+                <div class="leak-evidence-item">Business homepage contains platform claims but limited visible customer deployments</div>
+                <div class="leak-evidence-item">No enterprise logos, transaction volume claims, or customer outcome metrics visible at the evaluation stage</div>
+              </div>
+            </div>
+            <div>
+              <div class="leak-section-label">Why it matters</div>
+              <div class="leak-body">Infrastructure buyers seek proof that other companies like them have already committed. Logos, transaction volume numbers, and specific customer results are the primary trust signals that move enterprise buyers from evaluation to conversation.</div>
+            </div>
+            <div class="leak-opportunity">
+              <div class="leak-opportunity-num">$30K–$90K</div>
+              <div class="leak-opportunity-label">Illustrative pipeline created when enterprise-grade social proof replaces generic platform claims in key decision-making sections</div>
+            </div>
+            <div class="leak-rec">
+              <div class="leak-section-label leak-section-label--accent">Recommendation</div>
+              <div class="leak-rec-items">
+                <div class="leak-rec-item">Add enterprise customer logos with permission</div>
+                <div class="leak-rec-item">Surface transaction volume or processing scale claims</div>
+                <div class="leak-rec-item">Add one quantified customer result above the fold</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="leak-card">
+            <div class="leak-header">
+              <span class="leak-num">LEAK 04</span>
+              <span class="leak-title">Create Account CTA Too Early</span>
+            </div>
+            <div>
+              <div class="leak-section-label">Evidence</div>
+              <div class="leak-evidence-list">
+                <div class="leak-evidence-item">Most CTAs drive directly to "Create Account" before sufficient buyer education</div>
+                <div class="leak-evidence-item">Enterprise buyers typically require validation, social proof, and competitive evaluation before signup</div>
+              </div>
+            </div>
+            <div>
+              <div class="leak-section-label">Why it matters</div>
+              <div class="leak-body">A "Create Account" CTA converts consumer buyers. Enterprise buyers evaluating payment infrastructure for their business need to understand compliance coverage, pricing model, integration depth, and customer proof before they are ready to commit even to a free account. Pushing them to signup too early creates friction that causes exits.</div>
+            </div>
+            <div class="leak-opportunity">
+              <div class="leak-opportunity-num">$20K–$60K</div>
+              <div class="leak-opportunity-label">Illustrative opportunity from adding educational CTAs that move enterprise buyers through an evaluation journey before account creation</div>
+            </div>
+            <div class="leak-rec">
+              <div class="leak-section-label leak-section-label--accent">Recommendation</div>
+              <div class="leak-rec-items">
+                <div class="leak-rec-item">Add intermediate CTAs — "See How It Works," "View Integration Docs," "Talk to Sales"</div>
+                <div class="leak-rec-item">Reserve "Create Account" for buyers who have completed an education journey</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="audit-card-footer">
+          <div class="audit-total-opp">
+            <span class="audit-total-label">Total illustrative opportunity</span>
+            <span class="audit-total-num">$115K–$350K/yr</span>
+          </div>
+          <span class="audit-disclaimer">Illustrative opportunity using benchmark assumptions · All inputs stated · Adjustable with real data</span>
+        </div>
+      </div>
+
+      <!-- ═══════════════════════════════════════ -->
+      <!-- AUDIT 3: PESA -->
+      <!-- ═══════════════════════════════════════ -->
+      <div class="audit-card reveal">
+        <div class="audit-card-header">
+          <div>
+            <div class="audit-company-name">Pesa</div>
+            <div class="audit-company-desc">Cross-border payments platform providing consumer remittance, multi-currency wallets, and business payments for diaspora communities and African businesses.</div>
+          </div>
+          <div class="audit-meta">
+            <span class="audit-tag">Audit #003</span>
+            <span class="audit-tag">Cross-border Payments</span>
+            <span class="audit-leak-count">4 leaks identified</span>
+          </div>
+        </div>
+
+        <div class="audit-icp">
+          <span class="audit-icp-label">Target buyers</span>
+          <span class="audit-icp-tag">SMBs</span>
+          <span class="audit-icp-tag">Enterprise Finance Teams</span>
+          <span class="audit-icp-tag">FX-Heavy Operators</span>
+          <span class="audit-icp-tag">Global Operators</span>
+          <span class="audit-icp-tag">Diaspora Businesses</span>
+        </div>
+
+        <div class="audit-leaks">
+
+          <div class="leak-card">
+            <div class="leak-header">
+              <span class="leak-num">LEAK 01</span>
+              <span class="leak-title">Consumer Brand Dominates Business Brand</span>
+            </div>
+            <div>
+              <div class="leak-section-label">Evidence</div>
+              <div class="leak-evidence-list">
+                <div class="leak-evidence-item">Consumer product appears significantly more mature, developed, and prominently featured</div>
+                <div class="leak-evidence-item">Business positioning feels secondary — less copy depth, less proof, less visual hierarchy</div>
+                <div class="leak-evidence-item">Business buyers evaluating Pesa as an infrastructure provider form negative first impressions</div>
+              </div>
+            </div>
+            <div>
+              <div class="leak-section-label">Why it matters</div>
+              <div class="leak-body">Business buyers evaluate seriousness in the first 10 seconds. When the consumer product visually and narratively dominates, enterprise prospects conclude the business product is an afterthought — and exit before discovering its actual capability.</div>
+            </div>
+            <div class="leak-opportunity">
+              <div class="leak-opportunity-num">$30K–$100K</div>
+              <div class="leak-opportunity-label">Illustrative annual pipeline created when business product receives parity positioning with consumer product at ACV of $10K–$35K</div>
+            </div>
+            <div class="leak-rec">
+              <div class="leak-section-label leak-section-label--accent">Recommendation</div>
+              <div class="leak-rec-items">
+                <div class="leak-rec-item">Elevate business product to equal visual and narrative prominence</div>
+                <div class="leak-rec-item">Create dedicated business landing page with its own credibility signals</div>
+                <div class="leak-rec-item">Establish business-first proof section independent of consumer testimonials</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="leak-card">
+            <div class="leak-header">
+              <span class="leak-num">LEAK 02</span>
+              <span class="leak-title">Nine-Step Business Onboarding</span>
+            </div>
+            <div>
+              <div class="leak-section-label">Evidence</div>
+              <div class="leak-evidence-list">
+                <div class="leak-evidence-item">Business account creation requires nine distinct stages</div>
+                <div class="leak-evidence-item">No visible progress indicators showing how far through the process a user is</div>
+                <div class="leak-evidence-item">No save-and-return functionality for users who cannot complete in one session</div>
+              </div>
+            </div>
+            <div>
+              <div class="leak-section-label">Why it matters</div>
+              <div class="leak-body">High onboarding friction directly suppresses activation. Finance and operations leaders completing business account setup are frequently interrupted — without save-and-return, an interruption means starting over. Without progress indicators, users cannot estimate time commitment. Both drive abandonment from buyers who had genuine intent.</div>
+            </div>
+            <div class="leak-section-label">Illustrative math</div>
+            <div class="leak-math">
+              <div class="leak-math-row"><span class="leak-math-arrow">·</span> 100 business account signups</div>
+              <div class="leak-math-row"><span class="leak-math-arrow">↓</span> 20–40 abandon during 9-step onboarding</div>
+              <div class="leak-math-row"><span class="leak-math-arrow">↓</span> 2–4 lost customer opportunities per 100 signups</div>
+              <div class="leak-math-row leak-math-row--result"><span class="leak-math-arrow">→</span> $20K–$140K annual revenue per 100 signups at $10K–$35K ACV</div>
+            </div>
+            <div class="leak-opportunity">
+              <div class="leak-opportunity-num">$20K–$140K</div>
+              <div class="leak-opportunity-label">Illustrative annual opportunity from reducing onboarding abandonment — recoverable with progress indicators, save-and-return, and step reduction</div>
+            </div>
+            <div class="leak-rec">
+              <div class="leak-section-label leak-section-label--accent">Recommendation</div>
+              <div class="leak-rec-items">
+                <div class="leak-rec-item">Add visible progress indicator showing current step and total steps</div>
+                <div class="leak-rec-item">Implement save-and-return so users can complete across multiple sessions</div>
+                <div class="leak-rec-item">Reduce perceived effort by grouping related steps and removing non-essential fields</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="leak-card">
+            <div class="leak-header">
+              <span class="leak-num">LEAK 03</span>
+              <span class="leak-title">Limited Business Social Proof</span>
+            </div>
+            <div>
+              <div class="leak-section-label">Evidence</div>
+              <div class="leak-evidence-list">
+                <div class="leak-evidence-item">Consumer testimonials are strong and visible</div>
+                <div class="leak-evidence-item">Business case studies and outcome metrics are largely absent</div>
+                <div class="leak-evidence-item">No business logos, transaction volumes, or measurable business results surfaced</div>
+              </div>
+            </div>
+            <div>
+              <div class="leak-section-label">Why it matters</div>
+              <div class="leak-body">Business buyers trust business outcomes. A consumer testimonial saying "easy to send money home" does not move a CFO evaluating a multi-currency business payment infrastructure. Business buyers need to see other businesses — their size, their sector, their results.</div>
+            </div>
+            <div class="leak-opportunity">
+              <div class="leak-opportunity-num">$25K–$75K</div>
+              <div class="leak-opportunity-label">Illustrative pipeline created by surfacing business-specific logos, results, and case studies at key decision points in the business buyer journey</div>
+            </div>
+            <div class="leak-rec">
+              <div class="leak-section-label leak-section-label--accent">Recommendation</div>
+              <div class="leak-rec-items">
+                <div class="leak-rec-item">Add business customer logos and transaction volume proof</div>
+                <div class="leak-rec-item">Create at least one quantified business case study</div>
+                <div class="leak-rec-item">Surface business results near business CTAs — not consumer results</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="leak-card">
+            <div class="leak-header">
+              <span class="leak-num">LEAK 04</span>
+              <span class="leak-title">Broad Messaging Across Too Many ICPs</span>
+            </div>
+            <div>
+              <div class="leak-section-label">Evidence</div>
+              <div class="leak-evidence-list">
+                <div class="leak-evidence-item">Homepage simultaneously addresses SMBs, enterprises, FX-heavy firms, and global operators</div>
+                <div class="leak-evidence-item">No segmented buyer pathways — all ICPs land on the same generic page</div>
+              </div>
+            </div>
+            <div>
+              <div class="leak-section-label">Why it matters</div>
+              <div class="leak-body">An SMB sending $5K a month and an enterprise processing $2M a month have different pain points, different buying processes, and different trust signals. One homepage narrative cannot close both. The result is a page that resonates weakly with everyone.</div>
+            </div>
+            <div class="leak-opportunity">
+              <div class="leak-opportunity-num">10–25%</div>
+              <div class="leak-opportunity-label">Estimated conversion efficiency improvement from segmenting buyer journeys — consistent with B2B positioning improvements at this stage</div>
+            </div>
+            <div class="leak-rec">
+              <div class="leak-section-label leak-section-label--accent">Recommendation</div>
+              <div class="leak-rec-items">
+                <div class="leak-rec-item">Create segmented buyer journey paths from the homepage</div>
+                <div class="leak-rec-item">Lead each path with the specific financial outcome that ICP cares about</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="audit-card-footer">
+          <div class="audit-total-opp">
+            <span class="audit-total-label">Total illustrative opportunity</span>
+            <span class="audit-total-num">$75K–$415K/yr</span>
+          </div>
+          <span class="audit-disclaimer">Illustrative opportunity using benchmark assumptions · All inputs stated · Adjustable with real data</span>
+        </div>
+      </div>
+
+      <!-- ═══════════════════════════════════════ -->
+      <!-- AUDIT 4: MIDEN -->
+      <!-- ═══════════════════════════════════════ -->
+      <div class="audit-card reveal">
+        <div class="audit-card-header">
+          <div>
+            <div class="audit-company-name">Miden</div>
+            <div class="audit-company-desc">Embedded finance infrastructure provider offering card issuing, banking-as-a-service, wallet infrastructure, and payments infrastructure for African businesses. YC 2024 cohort.</div>
+          </div>
+          <div class="audit-meta">
+            <span class="audit-tag">Audit #004</span>
+            <span class="audit-tag">Embedded Finance · YC 2024</span>
+            <span class="audit-leak-count">4 leaks identified</span>
+          </div>
+        </div>
+
+        <div class="audit-icp">
+          <span class="audit-icp-label">Target buyers</span>
+          <span class="audit-icp-tag">Fintech Builders</span>
+          <span class="audit-icp-tag">Platform Operators</span>
+          <span class="audit-icp-tag">Enterprise Finance Teams</span>
+          <span class="audit-icp-tag">BaaS Buyers</span>
+        </div>
+
+        <div class="audit-leaks">
+
+          <div class="leak-card">
+            <div class="leak-header">
+              <span class="leak-num">LEAK 01</span>
+              <span class="leak-title">Social Proof Mismatch</span>
+            </div>
+            <div>
+              <div class="leak-section-label">Evidence</div>
+              <div class="leak-evidence-list">
+                <div class="leak-evidence-item">Homepage prominently showcases TechCrunch, TechCabal, and Y Combinator as credibility signals</div>
+                <div class="leak-evidence-item">Customer success proof — logos, results, deployments — largely absent</div>
+                <div class="leak-evidence-item">Media mentions dominate the trust layer where customer proof should live</div>
+              </div>
+            </div>
+            <div>
+              <div class="leak-section-label">Why it matters</div>
+              <div class="leak-body">Enterprise infrastructure buyers are not moved by press coverage. They are moved by evidence that other companies like them — in their sector, at their scale — have already committed and succeeded. Media credibility signals that a company is notable. Customer credibility signals that the product works.</div>
+            </div>
+            <div class="leak-section-label">Illustrative math</div>
+            <div class="leak-math">
+              <div class="leak-math-row"><span class="leak-math-arrow">·</span> 100 enterprise qualified visitors</div>
+              <div class="leak-math-row"><span class="leak-math-arrow">↓</span> 5–10 exit due to absence of customer proof</div>
+              <div class="leak-math-row"><span class="leak-math-arrow">↓</span> 0.5–1 lost customer opportunity (10% close rate)</div>
+              <div class="leak-math-row leak-math-row--result"><span class="leak-math-arrow">→</span> $10K–$50K ACV per lost opportunity</div>
+            </div>
+            <div class="leak-opportunity">
+              <div class="leak-opportunity-num">$10K–$50K</div>
+              <div class="leak-opportunity-label">Illustrative annual opportunity per 100 qualified visitors — recoverable by replacing media proof with customer deployment proof</div>
+            </div>
+            <div class="leak-rec">
+              <div class="leak-section-label leak-section-label--accent">Recommendation</div>
+              <div class="leak-rec-items">
+                <div class="leak-rec-item">Replace media mentions in the primary trust layer with customer logos and results</div>
+                <div class="leak-rec-item">Move YC badge to a secondary position — it signals investor credibility not customer credibility</div>
+                <div class="leak-rec-item">Add one quantified customer outcome to the homepage above the fold</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="leak-card">
+            <div class="leak-header">
+              <span class="leak-num">LEAK 02</span>
+              <span class="leak-title">Signup Dead-End</span>
+            </div>
+            <div>
+              <div class="leak-section-label">Evidence</div>
+              <div class="leak-evidence-list">
+                <div class="leak-evidence-item">Primary signup CTA triggers a "Contact us to complete signup" message</div>
+                <div class="leak-evidence-item">Buyers expect immediate self-serve onboarding after clicking signup</div>
+                <div class="leak-evidence-item">Expectation gap between CTA promise and actual experience creates trust friction</div>
+              </div>
+            </div>
+            <div>
+              <div class="leak-section-label">Why it matters</div>
+              <div class="leak-body">When a buyer clicks "Sign Up" and receives a manual contact message, the experience breaks their mental model of the product. It signals immaturity. High-intent buyers who expected immediate access either abandon or significantly delay — because the friction was unexpected at the moment of highest commitment.</div>
+            </div>
+            <div class="leak-opportunity">
+              <div class="leak-opportunity-num">$15K–$60K</div>
+              <div class="leak-opportunity-label">Illustrative annual opportunity from converting the signup dead-end into a guided onboarding or qualification flow that maintains buyer momentum</div>
+            </div>
+            <div class="leak-rec">
+              <div class="leak-section-label leak-section-label--accent">Recommendation</div>
+              <div class="leak-rec-items">
+                <div class="leak-rec-item">Replace "Sign Up" CTA with language that accurately reflects the actual next step</div>
+                <div class="leak-rec-item">Introduce a guided signup flow or waitlist with clear timeline and next steps</div>
+                <div class="leak-rec-item">If manual review is required — frame it as a premium qualification process, not a barrier</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="leak-card">
+            <div class="leak-header">
+              <span class="leak-num">LEAK 03</span>
+              <span class="leak-title">Homepage ICP Confusion</span>
+            </div>
+            <div>
+              <div class="leak-section-label">Evidence</div>
+              <div class="leak-evidence-list">
+                <div class="leak-evidence-item">Homepage addresses travel, finance, logistics, card issuing, and BaaS simultaneously</div>
+                <div class="leak-evidence-item">No industry-specific pathways for distinct buyer types</div>
+                <div class="leak-evidence-item">Broad messaging weakens buyer identification across all segments</div>
+              </div>
+            </div>
+            <div>
+              <div class="leak-section-label">Why it matters</div>
+              <div class="leak-body">A fintech building card issuing for a travel platform and a logistics company needing wallet infrastructure have completely different buying criteria, different integration requirements, and different proof needs. One page addressing both simultaneously creates weak resonance with each.</div>
+            </div>
+            <div class="leak-opportunity">
+              <div class="leak-opportunity-num">10–25%</div>
+              <div class="leak-opportunity-label">Estimated conversion efficiency improvement from industry-specific pathway segmentation</div>
+            </div>
+            <div class="leak-rec">
+              <div class="leak-section-label leak-section-label--accent">Recommendation</div>
+              <div class="leak-rec-items">
+                <div class="leak-rec-item">Create industry-specific paths — travel, logistics, fintech builder, enterprise</div>
+                <div class="leak-rec-item">Each path should lead with the outcome specific to that buyer's operational context</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="leak-card">
+            <div class="leak-header">
+              <span class="leak-num">LEAK 04</span>
+              <span class="leak-title">Feature-Led Positioning</span>
+            </div>
+            <div>
+              <div class="leak-section-label">Evidence</div>
+              <div class="leak-evidence-list">
+                <div class="leak-evidence-item">Heavy emphasis on infrastructure capabilities — card issuing, BaaS, wallet infrastructure</div>
+                <div class="leak-evidence-item">Limited framing of what the buyer's business looks like after using the product</div>
+                <div class="leak-evidence-item">Business transformation language largely absent from primary positioning</div>
+              </div>
+            </div>
+            <div>
+              <div class="leak-section-label">Why it matters</div>
+              <div class="leak-body">At the evaluation stage, buyers are not yet thinking about features — they are thinking about whether this product solves their specific business problem. Leading with infrastructure capabilities before establishing the business outcome creates a comprehension gap that exits buyers before they reach the features.</div>
+            </div>
+            <div class="leak-opportunity">
+              <div class="leak-opportunity-num">$20K–$80K</div>
+              <div class="leak-opportunity-label">Illustrative pipeline created when feature-led positioning is replaced with customer transformation language in primary sections</div>
+            </div>
+            <div class="leak-rec">
+              <div class="leak-section-label leak-section-label--accent">Recommendation</div>
+              <div class="leak-rec-items">
+                <div class="leak-rec-item">Lead with customer transformation — what the buyer's business gains — before describing infrastructure</div>
+                <div class="leak-rec-item">Frame each capability as a business outcome, not a technical specification</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="audit-card-footer">
+          <div class="audit-total-opp">
+            <span class="audit-total-label">Total illustrative opportunity</span>
+            <span class="audit-total-num">$55K–$190K/yr</span>
+          </div>
+          <span class="audit-disclaimer">Illustrative opportunity using benchmark assumptions · All inputs stated · Adjustable with real data</span>
+        </div>
+      </div>
+
+      <!-- ═══════════════════════════════════════ -->
+      <!-- AUDIT 5: POMELO -->
+      <!-- ═══════════════════════════════════════ -->
+      <div class="audit-card reveal">
+        <div class="audit-card-header">
+          <div>
+            <div class="audit-company-name">Pomelo</div>
+            <div class="audit-company-desc">Card issuing, processing, BIN sponsorship, risk management, and payment infrastructure provider operating across Latin America. YC W20 cohort.</div>
+          </div>
+          <div class="audit-meta">
+            <span class="audit-tag">Audit #005</span>
+            <span class="audit-tag">Payment Infrastructure · LatAm</span>
+            <span class="audit-leak-count">4 leaks identified</span>
+          </div>
+        </div>
+
+        <div class="audit-icp">
+          <span class="audit-icp-label">Target buyers</span>
+          <span class="audit-icp-tag">Banks</span>
+          <span class="audit-icp-tag">Fintechs</span>
+          <span class="audit-icp-tag">Global Businesses</span>
+          <span class="audit-icp-tag">Platform Operators</span>
+        </div>
+
+        <div class="audit-leaks">
+
+          <div class="leak-card">
+            <div class="leak-header">
+              <span class="leak-num">LEAK 01</span>
+              <span class="leak-title">Contact Form Friction</span>
+            </div>
+            <div>
+              <div class="leak-section-label">Evidence</div>
+              <div class="leak-evidence-list">
+                <div class="leak-evidence-item">Contact form requests name, email, phone, country, company, website, and business needs</div>
+                <div class="leak-evidence-item">No explanation of next steps, meeting format, or expected outcomes above the form</div>
+                <div class="leak-evidence-item">High-intent buyers face information asymmetry before committing</div>
+              </div>
+            </div>
+            <div>
+              <div class="leak-section-label">Why it matters</div>
+              <div class="leak-body">At Pomelo's deal sizes — infrastructure contracts for banks and fintechs in Latin America — qualified buyers who are not shown what happens after form submission frequently delay or exit. The form asks for significant personal and business information without establishing what the buyer receives in return.</div>
+            </div>
+            <div class="leak-section-label">Illustrative math</div>
+            <div class="leak-math">
+              <div class="leak-math-row"><span class="leak-math-arrow">·</span> 100 qualified contact page visitors</div>
+              <div class="leak-math-row"><span class="leak-math-arrow">↓</span> 8–12 abandon due to form friction and uncertainty</div>
+              <div class="leak-math-row"><span class="leak-math-arrow">↓</span> 1 lost customer opportunity (10% close rate)</div>
+              <div class="leak-math-row leak-math-row--result"><span class="leak-math-arrow">→</span> $15K–$50K ACV per lost opportunity</div>
+            </div>
+            <div class="leak-opportunity">
+              <div class="leak-opportunity-num">$15K–$50K</div>
+              <div class="leak-opportunity-label">Annual revenue opportunity per 100 qualified contact page visitors — recoverable with pre-form value framing and next-step clarity</div>
+            </div>
+            <div class="leak-rec">
+              <div class="leak-section-label leak-section-label--accent">Recommendation</div>
+              <div class="leak-rec-items">
+                <div class="leak-rec-item">Add meeting agenda, timeline, and expected deliverables above the form</div>
+                <div class="leak-rec-item">Clarify what the buyer will receive — not just that someone will contact them</div>
+                <div class="leak-rec-item">Reframe the CTA as a diagnostic or evaluation session</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="leak-card">
+            <div class="leak-header">
+              <span class="leak-num">LEAK 02</span>
+              <span class="leak-title">Broad ICP Messaging</span>
+            </div>
+            <div>
+              <div class="leak-section-label">Evidence</div>
+              <div class="leak-evidence-list">
+                <div class="leak-evidence-item">Homepage simultaneously targets banks, fintechs, and global businesses</div>
+                <div class="leak-evidence-item">No segmented pathways for each buyer type</div>
+                <div class="leak-evidence-item">Different buyers have fundamentally different purchasing criteria, timelines, and proof needs</div>
+              </div>
+            </div>
+            <div>
+              <div class="leak-section-label">Why it matters</div>
+              <div class="leak-body">A bank evaluating BIN sponsorship and a fintech evaluating card issuing infrastructure have different compliance requirements, different integration timelines, and different board-level approval processes. One homepage narrative creates weak resonance with both and strong resonance with neither.</div>
+            </div>
+            <div class="leak-opportunity">
+              <div class="leak-opportunity-num">$30K–$100K</div>
+              <div class="leak-opportunity-label">Illustrative pipeline improvement from segmenting ICP pathways — each leading with the specific outcome and proof that buyer type evaluates</div>
+            </div>
+            <div class="leak-rec">
+              <div class="leak-section-label leak-section-label--accent">Recommendation</div>
+              <div class="leak-rec-items">
+                <div class="leak-rec-item">Create distinct pathways — Banks, Fintechs, Global Businesses — from the homepage</div>
+                <div class="leak-rec-item">Each path should open with the financial or operational outcome specific to that buyer</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="leak-card">
+            <div class="leak-header">
+              <span class="leak-num">LEAK 03</span>
+              <span class="leak-title">Social Proof Underutilized</span>
+            </div>
+            <div>
+              <div class="leak-section-label">Evidence</div>
+              <div class="leak-evidence-list">
+                <div class="leak-evidence-item">Awards and investor logos displayed prominently in primary trust positions</div>
+                <div class="leak-evidence-item">Customer success stories and outcome metrics are less prominent</div>
+                <div class="leak-evidence-item">Investor credibility prioritized over customer credibility at the evaluation stage</div>
+              </div>
+            </div>
+            <div>
+              <div class="leak-section-label">Why it matters</div>
+              <div class="leak-body">Enterprise buyers evaluating payment infrastructure are not moved by awards. They are moved by evidence that companies like them — in their market, at their scale — have already built on this infrastructure and succeeded. Awards signal the company is recognized. Customer outcomes signal the product delivers.</div>
+            </div>
+            <div class="leak-opportunity">
+              <div class="leak-opportunity-num">$20K–$80K</div>
+              <div class="leak-opportunity-label">Illustrative pipeline created by moving customer success proof closer to primary CTAs and reducing reliance on award and investor signals as primary trust drivers</div>
+            </div>
+            <div class="leak-rec">
+              <div class="leak-section-label leak-section-label--accent">Recommendation</div>
+              <div class="leak-rec-items">
+                <div class="leak-rec-item">Move customer logos and outcome metrics to primary trust positions near CTAs</div>
+                <div class="leak-rec-item">Reposition awards to a secondary section — present but not leading</div>
+                <div class="leak-rec-item">Add at least one quantified customer result with named company or anonymized sector</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="leak-card">
+            <div class="leak-header">
+              <span class="leak-num">LEAK 04</span>
+              <span class="leak-title">Language Consistency Gap</span>
+            </div>
+            <div>
+              <div class="leak-section-label">Evidence</div>
+              <div class="leak-evidence-list">
+                <div class="leak-evidence-item">Some interface and visual elements are not consistently in English across public-facing assets</div>
+                <div class="leak-evidence-item">International buyers evaluating Pomelo for cross-border infrastructure encounter language friction</div>
+              </div>
+            </div>
+            <div>
+              <div class="leak-section-label">Why it matters</div>
+              <div class="leak-body">For a payment infrastructure provider positioning for global and international buyers — banks and fintechs outside Latin America — language inconsistency creates trust friction. It signals that the product experience may not be fully standardized, which matters significantly at the compliance and integration evaluation stage.</div>
+            </div>
+            <div class="leak-opportunity">
+              <div class="leak-opportunity-num">$10K–$40K</div>
+              <div class="leak-opportunity-label">Illustrative opportunity from eliminating language trust friction for international enterprise buyers evaluating Pomelo for cross-border deployments</div>
+            </div>
+            <div class="leak-rec">
+              <div class="leak-section-label leak-section-label--accent">Recommendation</div>
+              <div class="leak-rec-items">
+                <div class="leak-rec-item">Standardize all public-facing interface elements to consistent English</div>
+                <div class="leak-rec-item">Implement language toggle for Spanish/Portuguese where relevant — intentional, not accidental</div>
+                <div class="leak-rec-item">Audit all UI screenshots and product images used in marketing materials for language consistency</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="audit-card-footer">
+          <div class="audit-total-opp">
+            <span class="audit-total-label">Total illustrative opportunity</span>
+            <span class="audit-total-num">$75K–$270K/yr</span>
+          </div>
+          <span class="audit-disclaimer">Illustrative opportunity using benchmark assumptions · All inputs stated · Adjustable with real data</span>
+        </div>
+      </div>
+
+      <!-- BOTTOM CTA -->
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:40px;display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap;margin-top:16px;" class="reveal">
+        <div>
+          <div class="section-label" style="margin-bottom:10px">Want to know what we'd find in your funnel?</div>
+          <h2 class="section-headline" style="margin-bottom:10px">Every audit above was free.<br/><span class="accent-text">Yours can be too.</span></h2>
+          <p style="font-size:15px;color:var(--text-secondary);line-height:1.7;max-width:500px;margin:0">Submit your funnel for a free revenue opportunity report. One funnel point. Dollar estimates. Written findings in 5 business days. No pitch attached.</p>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:12px;flex-shrink:0">
+          <button class="btn btn-primary btn-large" data-service="free-diagnosis">Get Free Revenue Diagnosis</button>
+          <a href="work.html" class="btn btn-outline" style="text-align:center">See Implementation Case Studies →</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <a href="index.html" class="logo">FlowForge <span class="logo-accent">Revenue</span></a>
+          <p>Revenue Engineering for B2B Fintech &amp; Payment Infrastructure.<br/>flowforgerevenue.solutions</p>
+        </div>
+        <div class="footer-nav">
+          <div class="footer-col">
+            <h4>Navigation</h4>
+            <ul>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="about.html">About</a></li>
+              <li><a href="services.html">Services</a></li>
+              <li><a href="work.html">Work</a></li>
+              <li><a href="research.html">Research</a></li>
+              <li><a href="faq.html">FAQ</a></li>
+              <li><a href="terms.html">Terms of Service</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Services</h4>
+            <ul>
+              <li><a href="#" data-service="free-diagnosis">Free Revenue Diagnosis</a></li>
+              <li><a href="#" data-service="full-audit">Full Revenue Audit</a></li>
+              <li><a href="#" data-service="engineering-sprint">Revenue Engineering Sprint</a></li>
+              <li><a href="#" data-service="partnership">Revenue Partnership</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Connect</h4>
+            <ul>
+              <li>
+                <a href="https://www.linkedin.com/in/flowforge-revenue-584870400" target="_blank" rel="noopener" class="linkedin-link">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                  LinkedIn
+                </a>
+              </li>
+              <li>
+                <a href="#" id="email-research" onclick="this.querySelector('span').textContent='Copied!';navigator.clipboard.writeText('flowforge.revenue@gmail.com');setTimeout(function(){document.getElementById('email-research').querySelector('span').textContent='flowforge.revenue@gmail.com'},2000);return false;">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,12 2,6"></polyline></svg>
+                  <span>flowforge.revenue@gmail.com</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&#169; 2026 FlowForge Revenue. All rights reserved.</p>
+        <div class="footer-bottom-links"><a href="terms.html">Terms of Service</a>
+          <a href="faq.html">FAQ</a><a href="about.html">About</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

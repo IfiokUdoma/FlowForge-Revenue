@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Payment Received — FlowForge Revenue</title>
+  <meta name="description" content="Payment confirmed. FlowForge Revenue will be in touch within 24 hours to kick off your engagement." />
+  <link rel="icon" type="image/png" href="FFR_logo.png" />
+  <link rel="apple-touch-icon" href="FFR_logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="logo"><img src="FFR_logo.png" alt="FlowForge Revenue" class="logo-img" /></a>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="services.html" class="nav-link">Services</a>
+        <a href="work.html" class="nav-link">Work</a>
+        <a href="research.html" class="nav-link">Research</a>
+        <a href="faq.html" class="nav-link">FAQ</a>
+      </div>
+      <div class="nav-toggle" id="nav-toggle"><span></span><span></span><span></span></div>
+    </div>
+    <div class="nav-mobile" id="nav-mobile">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="services.html" class="nav-link">Services</a>
+      <a href="work.html" class="nav-link">Work</a>
+        <a href="research.html" class="nav-link">Research</a>
+      <a href="faq.html" class="nav-link">FAQ</a>
+    </div>
+  </nav>
+
+  <div class="thankyou-section">
+    <div class="thankyou-grid"></div>
+    <div class="thankyou-inner">
+      <div class="thankyou-icon">✓</div>
+      <h1>Payment received.<br/><span class="accent-text">We're on it.</span></h1>
+      <p>Your payment has been confirmed. You're now officially in the FlowForge Revenue pipeline — and we don't keep people waiting.</p>
+
+      <div class="thankyou-steps">
+        <div class="thankyou-step">
+          <div class="thankyou-step-num">01</div>
+          <p><strong>Within 24 hours</strong> — We'll reach out to your email to confirm engagement scope, timeline, and the specific funnel area we're starting with.</p>
+        </div>
+        <div class="thankyou-step">
+          <div class="thankyou-step-num">02</div>
+          <p><strong>Day 1–5</strong> — Deep audit begins. We work through your funnel systematically and document every exit point we find.</p>
+        </div>
+        <div class="thankyou-step">
+          <div class="thankyou-step-num">03</div>
+          <p><strong>Delivery</strong> — Written findings, dollar-quantified leak map, and prioritized fix recommendations delivered on schedule.</p>
+        </div>
+        <div class="thankyou-step">
+          <div class="thankyou-step-num">04</div>
+          <p><strong>After delivery</strong> — The second payment becomes due once you've reviewed and accepted the deliverables. Then we move to implementation if that's the next step.</p>
+        </div>
+      </div>
+
+      <p style="font-size:14px;color:var(--text-muted);margin-bottom:32px">
+        Questions in the meantime? Email us at
+        <a href="#" id="ty-email" onclick="this.textContent='Copied!';navigator.clipboard.writeText('hello@flowforgerevenue.solutions');setTimeout(function(){document.getElementById('ty-email').textContent='hello@flowforgerevenue.solutions'},2000);return false;" style="color:var(--accent)">hello@flowforgerevenue.solutions</a>
+      </p>
+
+      <a href="index.html" class="btn btn-outline">Back to FlowForge Revenue →</a>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Application Received — FlowForge Revenue</title>
+  <meta name="description" content="Your revenue audit application has been received. Here is what happens next." />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon" type="image/png" href="FFR_logo.png" />
+  <link rel="apple-touch-icon" href="FFR_logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .ar-page {
+      min-height: 100vh;
+      background: var(--black);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .ar-hero {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 120px 40px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ar-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 72px 72px;
+      opacity: 0.14;
+      mask-image: radial-gradient(ellipse 70% 70% at 50% 40%, black 30%, transparent 100%);
+    }
+
+    .ar-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 680px;
+      width: 100%;
+    }
+
+    /* Status bar at top */
+    .ar-status {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 36px;
+    }
+    .ar-status-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--accent);
+      border-radius: 50%;
+      animation: pulse 2s ease infinite;
+      flex-shrink: 0;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.75); }
+    }
+
+    /* Main card */
+    .ar-card {
+      background: var(--surface);
+      border: 1px solid var(--border-light);
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+
+    .ar-card-header {
+      background: var(--surface-2);
+      border-bottom: 1px solid var(--border);
+      padding: 28px 36px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .ar-check {
+      width: 52px;
+      height: 52px;
+      background: var(--accent);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--black);
+      flex-shrink: 0;
+      box-shadow: 0 0 40px var(--accent-glow-strong);
+      animation: popIn 0.5s var(--ease, cubic-bezier(0.16,1,0.3,1)) both;
+    }
+    @keyframes popIn {
+      from { transform: scale(0.5); opacity: 0; }
+      to   { transform: scale(1); opacity: 1; }
+    }
+
+    .ar-card-header-text h1 {
+      font-family: var(--font-display);
+      font-size: clamp(20px, 2.5vw, 26px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      margin-bottom: 4px;
+    }
+    .ar-card-header-text p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      font-family: var(--font-mono);
+      letter-spacing: 0.04em;
+    }
+
+    .ar-card-body {
+      padding: 36px;
+    }
+
+    .ar-confirmation {
+      background: var(--accent-soft);
+      border: 1px solid rgba(212, 245, 60, 0.2);
+      border-radius: 10px;
+      padding: 18px 20px;
+      margin-bottom: 32px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    .ar-confirmation-icon {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--accent);
+      flex-shrink: 0;
+      padding-top: 1px;
+    }
+    .ar-confirmation p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.65;
+    }
+    .ar-confirmation p strong {
+      color: var(--text-primary);
+    }
+
+    /* Timeline */
+    .ar-timeline-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    .ar-timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .ar-step {
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      gap: 0 16px;
+      position: relative;
+    }
+
+    .ar-step-left {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .ar-step-num {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1px solid var(--border-light);
+      background: var(--surface-2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--accent);
+      flex-shrink: 0;
+      z-index: 1;
+    }
+
+    .ar-step-num--active {
+      background: var(--accent);
+      color: var(--black);
+      border-color: var(--accent);
+      box-shadow: 0 0 16px var(--accent-glow);
+    }
+
+    .ar-step-line {
+      width: 1px;
+      flex: 1;
+      min-height: 28px;
+      background: linear-gradient(to bottom, var(--border-light), var(--border));
+      margin: 4px 0;
+    }
+
+    .ar-step-content {
+      padding: 4px 0 32px;
+    }
+    .ar-step:last-child .ar-step-content {
+      padding-bottom: 0;
+    }
+
+    .ar-step-title {
+      font-family: var(--font-display);
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+      line-height: 1.35;
+    }
+    .ar-step-title--muted {
+      color: var(--text-muted);
+    }
+
+    .ar-step-desc {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.65;
+    }
+
+    .ar-step-tag {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      background: var(--accent-glow);
+      color: var(--accent);
+      border: 1px solid rgba(212, 245, 60, 0.2);
+      padding: 2px 8px;
+      border-radius: 4px;
+      margin-bottom: 6px;
+    }
+
+    /* Social proof strip */
+    .ar-proof {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px 28px;
+      margin-bottom: 24px;
+    }
+    .ar-proof-label {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+    }
+    .ar-proof-quote {
+      font-size: 15px;
+      color: var(--text-primary);
+      line-height: 1.7;
+      font-style: italic;
+      border-left: 2px solid var(--accent);
+      padding-left: 16px;
+      margin-bottom: 12px;
+    }
+    .ar-proof-source {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-muted);
+      padding-left: 18px;
+    }
+
+    /* Action links */
+    .ar-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    /* Security note */
+    .ar-security {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--text-muted);
+      letter-spacing: 0.06em;
+      margin-top: 24px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+    }
+    .ar-security svg { flex-shrink: 0; }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .ar-hero { padding: 100px 20px 60px; }
+      .ar-card-header { padding: 20px 24px; gap: 14px; }
+      .ar-card-body { padding: 24px; }
+      .ar-check { width: 44px; height: 44px; font-size: 18px; }
+      .ar-actions { flex-direction: column; }
+      .ar-actions .btn { width: 100%; justify-content: center; }
+      .ar-proof { padding: 20px; }
+    }
+  </style>
+</head>
+<body class="ar-page">
+
+  <!-- Minimal nav — no CTA needed here -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="logo"><img src="FFR_logo.png" alt="FlowForge Revenue" class="logo-img" /></a>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="work.html" class="nav-link">Work</a>
+        <a href="research.html" class="nav-link">Research</a>
+        <a href="services.html" class="nav-link">Services</a>
+        <a href="faq.html" class="nav-link">FAQ</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="ar-hero">
+    <div class="ar-grid"></div>
+    <div class="ar-inner">
+
+      <!-- Live status indicator -->
+      <div class="ar-status">
+        <div class="ar-status-dot"></div>
+        Application received and logged
+      </div>
+
+      <!-- Main confirmation card -->
+      <div class="ar-card">
+        <div class="ar-card-header">
+          <div class="ar-check">✓</div>
+          <div class="ar-card-header-text">
+            <h1>Application Received &amp;<br/>Here's What to Expect</h1>
+            <p>Ref: FFR-<span id="ref-num">loading...</span> · Secured</p>
+          </div>
+        </div>
+
+        <div class="ar-card-body">
+
+          <!-- Confirmation statement -->
+          <div class="ar-confirmation">
+            <div class="ar-confirmation-icon">&#9632;</div>
+            <p>We have received your Revenue Opportunity Report request. <strong>Your details are secure.</strong> Our team is currently reviewing your company's public funnel to scope the audit. You will receive a personal update within <strong>48 business hours</strong> — not an automated sequence.</p>
+          </div>
+
+          <!-- Timeline -->
+          <div class="ar-timeline-label">What happens next</div>
+          <div class="ar-timeline">
+
+            <div class="ar-step">
+              <div class="ar-step-left">
+                <div class="ar-step-num ar-step-num--active">01</div>
+                <div class="ar-step-line"></div>
+              </div>
+              <div class="ar-step-content">
+                <div class="ar-step-tag">Now — Complete</div>
+                <div class="ar-step-title">Application logged &amp; confirmed</div>
+                <div class="ar-step-desc">Your submission has been received. A confirmation has been sent to your email. Your details are secure and will not be shared.</div>
+              </div>
+            </div>
+
+            <div class="ar-step">
+              <div class="ar-step-left">
+                <div class="ar-step-num">02</div>
+                <div class="ar-step-line"></div>
+              </div>
+              <div class="ar-step-content">
+                <div class="ar-step-tag">Within 24 hours</div>
+                <div class="ar-step-title ar-step-title--muted">Profile &amp; funnel review</div>
+                <div class="ar-step-desc">We review your company's public-facing product — homepage, demo flow, pricing page, onboarding — to identify the highest-impact funnel point to audit first.</div>
+              </div>
+            </div>
+
+            <div class="ar-step">
+              <div class="ar-step-left">
+                <div class="ar-step-num">03</div>
+                <div class="ar-step-line"></div>
+              </div>
+              <div class="ar-step-content">
+                <div class="ar-step-tag">Within 48 hours</div>
+                <div class="ar-step-title ar-step-title--muted">Personal outreach to confirm scope</div>
+                <div class="ar-step-desc">Ifiok will reach out personally to confirm the audit scope, clarify any details, and outline the exact funnel point we will be analyzing — with an estimated timeline for findings delivery.</div>
+              </div>
+            </div>
+
+            <div class="ar-step">
+              <div class="ar-step-left">
+                <div class="ar-step-num">04</div>
+                <div class="ar-step-line"></div>
+              </div>
+              <div class="ar-step-content">
+                <div class="ar-step-tag">Day 3–7</div>
+                <div class="ar-step-title ar-step-title--muted">Written findings delivered</div>
+                <div class="ar-step-desc">You receive your Revenue Opportunity Report — the observable evidence, benchmark model with every assumption listed, illustrative dollar opportunity with confidence rating, unknown variables stated, and 3 ranked fixes. No pitch attached. Just findings.</div>
+              </div>
+            </div>
+
+          </div><!-- /.ar-timeline -->
+
+          <!-- Security note -->
+          <div class="ar-security">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Your submission is encrypted. We never share, sell, or distribute your data to third parties.
+          </div>
+
+        </div><!-- /.ar-card-body -->
+      </div><!-- /.ar-card -->
+
+      <!-- Social proof -->
+      <div class="ar-proof">
+        <div class="ar-proof-label">While you wait — what our audits look like</div>
+        <div class="ar-proof-quote">
+          "Before anyone hired us, we audited Finix's acquisition funnel and found a $250K–$350K annual margin recovery opportunity sitting in plain sight. The fix was a messaging reframe — from API flexibility to financial outcome. That is the kind of thing that only shows up when you audit with a revenue hypothesis, not a creative brief."
+        </div>
+        <div class="ar-proof-source">— Ifiok Udoma, FlowForge Revenue</div>
+      </div>
+
+      <!-- Action links -->
+      <div class="ar-actions">
+        <a href="work.html" class="btn btn-primary">Read the Full Case Studies →</a>
+        <a href="services.html" class="btn btn-outline">Explore Paid Engagement Options</a>
+        <a href="index.html" class="btn btn-ghost">Back to Home</a>
+      </div>
+
+    </div><!-- /.ar-inner -->
+  </div><!-- /.ar-hero -->
+
+  <!-- Minimal footer -->
+  <div style="border-top:1px solid var(--border);padding:20px 40px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;">
+    <p style="font-family:var(--font-mono);font-size:11px;color:var(--text-muted);">© 2026 FlowForge Revenue. All rights reserved.</p>
+    <p style="font-family:var(--font-mono);font-size:11px;color:var(--text-muted);">flowforgerevenue.solutions</p>
+  </div>
+
+  <script>
+    // Generate a pseudo-reference number for the professional feel
+    (function () {
+      var d = new Date();
+      var ref = d.getFullYear().toString().slice(-2) +
+                String(d.getMonth() + 1).padStart(2, '0') +
+                String(d.getDate()).padStart(2, '0') + '-' +
+                Math.floor(1000 + Math.random() * 9000);
+      var el = document.getElementById('ref-num');
+      if (el) el.textContent = ref;
+    })();
+
+    // Mobile nav toggle
+    var toggle = document.getElementById('nav-toggle');
+    var mobile = document.getElementById('nav-mobile');
+    if (toggle && mobile) {
+      toggle.addEventListener('click', function () { mobile.classList.toggle('open'); });
+    }
+  </script>
+</body>
+</html>
